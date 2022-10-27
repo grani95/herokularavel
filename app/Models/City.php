@@ -16,4 +16,9 @@ public function locations(){
     return $this->hasMany(Location::class,"cityId","cityId");
 }
 
+public function patients(){
+
+    return $this->hasManyThrough(Patient::class,Location::class,"cityId","loctId","cityId","loctId");
+}
+
 }

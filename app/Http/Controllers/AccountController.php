@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\User;
 use Validator;
+use Auth;
+use App\Mail\activateAccount;
+use Illuminate\Support\Facades\Mail;
+
 class AccountController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -23,16 +27,38 @@ public function register(Request $request){
     // if($validatior->fails()){
     //     return response()->json("invalid input !!");
     //         }
-$input=$request->all();
-//dd($input);
-$input['password']=bcrypt($input['password']);
-$user=User::create($input);
-$json_obj['token']=$user->createToken('Hospital_app_token')->plainTextToken;
-$json_obj['usr_id']=$user->id;
-$json_obj['name']=$user->name;
-$json_obj['permetion']=['opfile'=>$user->opfile,'doct'=>$user->doct
-,'doct_d'=>$user->doct_d,'rsv'=>$user->rsv];
-return response()->json($json_obj);
+// return $request->photo->move("uploads");
+    $input=$request->all();
+
+// dd($input);
+$photo = $request->photo;
+$newName=time().$photo->getClientOriginalName();
+$request->photo->move("uploads",$newName);
+$password=bcrypt($input['password']);
+// $user=User::create([
+//     'name'=>$request->name,
+//     'email'=>$request->email,
+//     'password'=>$password,
+//     'imgPath'=>$newName,
+//     'usr'=>$request->usr,
+//     'opfile'=>$request->opfile,
+//     'doct'=>$request->doct,
+//     'doct_d'=>$request->doct_d,
+//     'user_id'=>$request->user_id,
+//     'rsv'=>$request->rsv,
+//     'usr'=>$request->usr
+// ]);
+$to= $request->email;
+Mail::send(new activateAccount($to));
+
+// $json_obj['token']=$user->createToken('Hospital_app_token')->plainTextToken;
+// $json_obj['usr_id']=$user->id;
+// $json_obj['name']=$user->name;
+// $json_obj['imgPath']=$user->imgPath;
+// $json_obj['permetion']=['opfile'=>$user->opfile,'doct'=>$user->doct
+// ,'doct_d'=>$user->doct_d,'rsv'=>$user->rsv];
+// return response()->json($json_obj);
+return "ok";
 }
 
     public function login(Request $request){
@@ -43,9 +69,9 @@ return response()->json($json_obj);
     if($validatior->fails()){
         return response()->json("invalid input !!");
     }
+// return Hash::make($request->password);
 
-
-if(auth()->attempt(['name'=>request("name"),'password'=>request("password")])){
+if(auth()->attempt(['name'=>request("name"),'password'=>request("password"),'status'=>1])){
     //$user = User::where('name',request('name'))->first();
 
    //if(Hash::check(request('password'), $user->getAuthPassword())){
@@ -54,6 +80,7 @@ if(auth()->attempt(['name'=>request("name"),'password'=>request("password")])){
     $json_obj['token']=$user->createToken('Hospital_app_token')->plainTextToken;
     $json_obj['usr_id']=$user->id;
     $json_obj['name']=$user->name;
+    $json_obj['imgPath']="http://localhost:8000/uploads/".$user->imgPath;
     $json_obj['permetion']=["opfile"=>$user->opfile,"doct"=>$user->doct
     ,"doct_d"=>$user->doct_d,"rsv"=>$user->rsv];
     return response()->json(["resp"=>200,"data"=>$json_obj]);
@@ -62,4 +89,23 @@ if(auth()->attempt(['name'=>request("name"),'password'=>request("password")])){
 
 
     }
+
+
+public function email(){
+Mail::send(new activateAccount());
+return "ok";
+}
+
+public function setEmail(){
+
+    Mail::send(new activateAccount());
+    return Response()->json(["code"=>200]);
+}
+
+    //  Account Activation
+    public function activateAccount(Request $request){
+$user= User::where(["email"=>$request->email])->first();
+$user->status=1;
+return $user->save();
+}
 }

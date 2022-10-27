@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('loctId');
             $table->double('tel');
             $table->double('tel2');
-            $table->integer('exam_type');
+            // $table->integer('exam_type');
             $table->string('email')->unique();
             $table->boolean('status')->default('1');
             $table->boolean('gender')->default('0');

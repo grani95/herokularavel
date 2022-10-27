@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->rememberToken();
             $table->timestamps();
+            $table->boolean('status')->default('0');
         });
     }
 

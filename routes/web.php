@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Patient;
+use App\Models\Location;
+use App\Models\City;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    // $city=App\Models\City::withCount("patients")->get();
+$patientInfo=Patient::join("locations","locations.loctId","patients.loctId")
+->join("cities","cities.cityId","locations.cityId")
+->get(["patients.name","patients.father_name","patients.sure_name","locations.loctName","cities.cityName"]);
+// return $city;
+//return $patientInfo;
+    return view('welcome',["patientInfo"=>$patientInfo]);
 });

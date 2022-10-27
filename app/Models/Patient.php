@@ -21,7 +21,8 @@ class Patient extends Model
         'loctId',
         'tel',
         'tel2',
-        'exam_type',
+        // 'exa
+        'm_type',
         'email',
         'status',
         'gender',
@@ -32,13 +33,12 @@ class Patient extends Model
         'paid'
 
     ];
-    protected $guarded=['file_id','user_id'];
+    // protected $guarded=['file_id','user_id'];
     public function location(){
 
-        return $this->belongsTo(Location::class,"file_id","loctId");
+        return $this->belongsTo(Location::class,"loctId","loctId");
     }
-    // public function city(){
-
-    //     return $this->hasOneThrough(City::class,Location::class);
-    // }
+    public function city(){
+        return $this->hasManyThrough(City::class,Location::class,"loctId","cityId","file_id","loctId");
+    }
 }

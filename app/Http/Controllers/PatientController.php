@@ -17,13 +17,15 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         //if(auth()->user()->opfile){
-        if(Gate::allows("view",Patient::class)){
-           $permetion = $request->all()['permetion'];
-           //$patient=$request->all();
-           $patient=Patient::create($request->all()['patient']);
-            return Response()->json(["res_code"=>200,"pateint"=>$patient]);
+       // if(Gate::allows("view",Patient::class)){
+         //  $permetion = $request->all()['permetion'];
+             //$patient=$request->all();
+        //    $patient=Patient::create($request->all()['patient']);
+//  dd($request->all());
+        $patient=Patient::create($request->all()['patient']);
+                    return Response()->json(["res_code"=>200,"pateint"=>$patient]);
 
-        }
+      //  }
         return Response()->json(["res_code"=>304,"mesg"=>"unauthorized"]);
 
 
@@ -50,9 +52,12 @@ class PatientController extends Controller
 // return Response()->json(Patient::with("location")->get());
 
 $patients =Patient::paginate(5)->toArray();
-       return PatientResource::collection(Patient::with(["location"])->paginate(5));
-  // dd(PatientResource::collection(Patient::paginate(5)));
-        // return  Response()->json(["res_code"=>200,"patients"=>$patients]);
+
+return PatientResource::collection(Patient::with(["location.city"])->paginate(5));
+
+
+// dd(PatientResource::collection(Patient::paginate(5)));
+        //  return  Response()->json(["res_code"=>200,"patients"=>$patients]);
 
 
         $patients =Patient::paginate(5)->toArray();

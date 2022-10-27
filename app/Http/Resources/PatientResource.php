@@ -12,20 +12,17 @@ class PatientResource extends JsonResource
         return  [
             'file_id'=>$this->file_id,
             'identity_n'=>$this->file_id,
-            'name'=>$this->name." ".$this->father_name." ".$this->grand_name." ".
+            'name'=>$this->name." ".$this->father_name." ".
             $this->sure_name,
             'nation_id'=>$this->nation_id,
             'age'=>date_diff(date_create($this->birth_date), date_create(date("Y-m-d")))
             ->format('%y'),
-             'location'=>LocationCity::collection($this->loctId),
-            // 'location_name'=>$this->location->loctName,
-            // 'city_id'=>$this->city->cityId,
-            // 'city_name'=>$this->city->cityName,
-            'email'=>$this->email,
+            //  'location'=>LocationCity::collection($this->loctId),
+            'location_name'=>$this->location->loctName,
+            'city_id'=>$this->location->cityId,
+            'city_name'=>$this->location->city->cityName,
             'blood_cat'=>$this->blood_cat,
             'gender'=>$this->gender,
-            'tel'=>$this->tel,
-            'tel2'=>$this->tel2,
             'paid'=>$this->paid
              ];
 

@@ -38,7 +38,7 @@ class LocationsController extends Controller
         //
 
         $loct=Location::create($request->all());
-        return Response()->json(["res_code"=>200,"pateint"=>$loct]);
+        return Response()->json(["res_code"=>200,"location"=>$loct]);
     }
 
 
