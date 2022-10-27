@@ -52,6 +52,6 @@ class activateAccount extends Mailable
         ->from("granialmagory@gmail.com")
         ->to($this->recepiant)
         ->subject("تفعيل حساب مستخدم علي موقع مستشفي طوارئ")
-        ->view('welcome');
+        ->view('welcome',["email"=>$this->recepiant]);
     }
 }
