@@ -105,6 +105,8 @@ public function setEmail(){
     //  Account Activation
     public function activateAccount(Request $request){
 $user= User::where(["email"=>$request->email])->first();
+return $user;
+
 $user->status=1;
 return $user->save();
 }
