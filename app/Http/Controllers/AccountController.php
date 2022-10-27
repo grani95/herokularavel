@@ -58,7 +58,7 @@ Mail::send(new activateAccount($to));
 // $json_obj['permetion']=['opfile'=>$user->opfile,'doct'=>$user->doct
 // ,'doct_d'=>$user->doct_d,'rsv'=>$user->rsv];
 // return response()->json($json_obj);
-return "ok";
+ return "ok";
 }
 
     public function login(Request $request){
