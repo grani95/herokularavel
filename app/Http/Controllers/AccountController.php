@@ -35,19 +35,19 @@ $photo = $request->photo;
 $newName=time().$photo->getClientOriginalName();
 $request->photo->move("uploads",$newName);
 $password=bcrypt($input['password']);
-// $user=User::create([
-//     'name'=>$request->name,
-//     'email'=>$request->email,
-//     'password'=>$password,
-//     'imgPath'=>$newName,
-//     'usr'=>$request->usr,
-//     'opfile'=>$request->opfile,
-//     'doct'=>$request->doct,
-//     'doct_d'=>$request->doct_d,
-//     'user_id'=>$request->user_id,
-//     'rsv'=>$request->rsv,
-//     'usr'=>$request->usr
-// ]);
+ $user=User::create([
+    'name'=>$request->name,
+    'email'=>$request->email,
+    'password'=>$password,
+    'imgPath'=>$newName,
+    'usr'=>$request->usr,
+    'opfile'=>$request->opfile,
+    'doct'=>$request->doct,
+    'doct_d'=>$request->doct_d,
+    'user_id'=>$request->user_id,
+    'rsv'=>$request->rsv,
+    'usr'=>$request->usr
+]);
 $to= $request->email;
 Mail::send(new activateAccount($to));
 
