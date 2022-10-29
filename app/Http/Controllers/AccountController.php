@@ -110,7 +110,7 @@ return $user;
 
 $user->status=1;
 $status= $user->save();
-if($tatus){
+if($status){
     return "ok";
 }else{
 return "Error";
