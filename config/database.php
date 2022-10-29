@@ -50,7 +50,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'db_hms_system'),
             'username' => env('DB_USERNAME', 'granialmagory'),
-            'password' => env('DB_PASSWORD', 'Pa$$w0rd'),
+            'password' => env('DB_PASSWORD', 'Pa$$w0rd122073'),
             // 'host' => env('DB_HOST', 'localhost'),
             // 'port' => env('DB_PORT', '3306'),
             // 'database' => env('DB_DATABASE', 'hms_db'),
