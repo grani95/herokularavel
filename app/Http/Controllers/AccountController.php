@@ -109,6 +109,11 @@ $user= User::where(["email"=>$request->email])->first();
 return $user;
 
 $user->status=1;
-return $user->save();
+$status= $user->save();
+if($tatus){
+    return "ok";
+}else{
+return "Error";
+}
 }
 }

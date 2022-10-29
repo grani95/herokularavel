@@ -56,10 +56,15 @@
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     <?php
+                                    $email = "test@gmail.com";
                                         echo $email;
                                         ?>
-                                     <a href="/api/activateUserAccount">تفعيل الحساب</a>
+
+                                     <a href="/api/activateUserAccount/<?php echo $email; ?>">تفعيل الحساب</a>
                                 </div>
+
+<button id = "x" class="btn btn-primary" >alert</button>
+
                             </div>
                         </div>
       </div>
@@ -75,5 +80,16 @@
                 </div>
             </div>
         </div>
+
+        <script>
+
+            document.getElementById("x").addEventListener("click",function(e){
+
+
+                e.preventDefault();
+                alert(<?= $email ?>)
+            //    alert(eval(<?php echo "'".$email."'"  ?>))
+            });
+          </script>
     </body>
 </html>
