@@ -56,12 +56,18 @@
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     <?php
-                                    $email = "test@gmail.com";
-                                        echo $email;
-                                        ?>
+                                    // $email = "test@gmail.com";
+                                        // echo $email;
+                                       if($email){
+                                           ?>
 
                                      <a href="/api/activateUserAccount/<?php echo $email; ?>">تفعيل الحساب</a>
-                                </div>
+                                       <?php
+                                       }else{
+                                        echo "<h3>لا يمكن العثور علي عنوان البريد الرجاء إعادة التسجيل في الموقع</h3>"
+                                       }
+                                       ?>
+                                    </div>
 
 <button id = "x" class="btn btn-primary" >alert</button>
 
