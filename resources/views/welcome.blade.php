@@ -59,7 +59,7 @@
 
 
                          @if($email)
-                        <a href='/api/activateUserAccount/'.{{$email}}>تفعيل الحساب</a>
+                        <a href='/api/activateUserAccount/{{$email}}'>تفعيل الحساب</a>
 
                         @endif
                         <h3>لا يمكن العثور علي عنوان البريد الرجاء إعادة التسجيل في الموقع</h3>
