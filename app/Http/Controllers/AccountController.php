@@ -103,10 +103,10 @@ public function setEmail(){
 }
 
     //  Account Activation
-    public function activateAccount(Request $request){
+    public function activateAccount($email){
        //return "ok";
-        return ["ok",$request->email];
-$user= User::where(["email"=>$request->email])->first();
+        return ["ok",$email];
+$user= User::where(["email"=>$email])->first();
 // return $user;
 
 $user->status=1;

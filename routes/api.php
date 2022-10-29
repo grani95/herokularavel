@@ -29,7 +29,7 @@ Route::middleware(['cors'])
 
 });
 Route::middleware(['cors'])
-->get('/activateUserAccount',"App\Http\Controllers\AccountController@activateAccount");
+->get('/activateUserAccount/{email}',"App\Http\Controllers\AccountController@activateAccount");
 
 Route::middleware(['cors'])->get('/patient/showAll',"App\Http\Controllers\PatientController@showAll");
 
