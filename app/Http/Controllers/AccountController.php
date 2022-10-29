@@ -80,7 +80,7 @@ if(auth()->attempt(['name'=>request("name"),'password'=>request("password"),'sta
     $json_obj['token']=$user->createToken('Hospital_app_token')->plainTextToken;
     $json_obj['usr_id']=$user->id;
     $json_obj['name']=$user->name;
-    $json_obj['imgPath']="http://localhost:8000/uploads/".$user->imgPath;
+    $json_obj['imgPath']="http://herokularavel95.herokuapp.com/uploads/".$user->imgPath;
     $json_obj['permetion']=["opfile"=>$user->opfile,"doct"=>$user->doct
     ,"doct_d"=>$user->doct_d,"rsv"=>$user->rsv];
     return response()->json(["resp"=>200,"data"=>$json_obj]);
