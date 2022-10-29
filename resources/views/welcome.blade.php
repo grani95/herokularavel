@@ -56,14 +56,14 @@
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
 
-                                  {{
+
 
                          @if($email)
                         <a href='/api/activateUserAccount/'{{$email}}>تفعيل الحساب</a>
 
                         @endif
                         <h3>لا يمكن العثور علي عنوان البريد الرجاء إعادة التسجيل في الموقع</h3>
- }}
+
 
                                     </div>
 
